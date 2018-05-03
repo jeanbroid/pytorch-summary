@@ -34,7 +34,7 @@ def summary(model, input_size):
                not (module == model)):
                 hooks.append(module.register_forward_hook(hook))
                 
-        if torch.cuda.is_available():
+        if torch.cuda.is_available() and next(model.parameters()).is_cuda:
             dtype = torch.cuda.FloatTensor
         else:
             dtype = torch.FloatTensor
